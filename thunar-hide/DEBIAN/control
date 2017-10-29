@@ -1,0 +1,11 @@
+Package: thunar-hide
+Version: 1.0.0-1big1
+Depends: thunar
+Architecture: all
+Maintainer: Bruno Goncalves <bigbruno@gmail.com>
+Section: admin
+Priority: optional
+Installed-Size:28
+Description: Hide Thunar in menu to use just file renamer in nemo file manager or in menu
+
+

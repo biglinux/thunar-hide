@@ -1,0 +1,26 @@
+#!/bin/sh
+set -e
+package_name=thunar-hide
+mkdir -p "/usr/share/dpkgdivert/thunar-hide"
+case "$1" in
+  install)
+    dpkg-divert --package "$package_name" --divert "/usr/share/dpkgdivert/thunar-hide/usrshareapplicationsThunar-folder-handler.desktop" --rename "/usr/share/applications/Thunar-folder-handler.desktop"
+    dpkg-divert --package "$package_name" --divert "/usr/share/dpkgdivert/thunar-hide/usrshareapplicationsThunar.desktop" --rename "/usr/share/applications/Thunar.desktop"
+    dpkg-divert --package "$package_name" --divert "/usr/share/dpkgdivert/thunar-hide/usrshareapplicationsthunar-settings.desktop" --rename "/usr/share/applications/thunar-settings.desktop"
+    ;;
+  upgrade)
+if [ "$(dpkg-divert --list "/usr/share/applications/Thunar-folder-handler.desktop")" = "" ]
+then
+    dpkg-divert --package "$package_name" --divert "/usr/share/dpkgdivert/thunar-hide/usrshareapplicationsThunar-folder-handler.desktop" --rename "/usr/share/applications/Thunar-folder-handler.desktop"
+fi
+if [ "$(dpkg-divert --list "/usr/share/applications/Thunar.desktop")" = "" ]
+then
+    dpkg-divert --package "$package_name" --divert "/usr/share/dpkgdivert/thunar-hide/usrshareapplicationsThunar.desktop" --rename "/usr/share/applications/Thunar.desktop"
+fi
+if [ "$(dpkg-divert --list "/usr/share/applications/thunar-settings.desktop")" = "" ]
+then
+    dpkg-divert --package "$package_name" --divert "/usr/share/dpkgdivert/thunar-hide/usrshareapplicationsthunar-settings.desktop" --rename "/usr/share/applications/thunar-settings.desktop"
+fi
+;;
+esac
+exit 0

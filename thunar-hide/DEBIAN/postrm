@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+package_name=thunar-hide
+case "$1" in
+  remove)
+    dpkg-divert --package "$package_name" --rename --remove "/usr/share/applications/Thunar-folder-handler.desktop"
+    dpkg-divert --package "$package_name" --rename --remove "/usr/share/applications/Thunar.desktop"
+    dpkg-divert --package "$package_name" --rename --remove "/usr/share/applications/thunar-settings.desktop"
+    ;;
+  purge)
+    dpkg-divert --package "$package_name" --rename --remove "/usr/share/applications/Thunar-folder-handler.desktop"
+    dpkg-divert --package "$package_name" --rename --remove "/usr/share/applications/Thunar.desktop"
+    dpkg-divert --package "$package_name" --rename --remove "/usr/share/applications/thunar-settings.desktop"
+;;
+esac
+exit 0
